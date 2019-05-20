@@ -1,10 +1,13 @@
 import { Component, OnInit, Optional, Inject } from '@angular/core';
-import {  HttpClient } from '@angular/common/http';
+import  { HttpClient } from '@angular/common/http';
+
+
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  providers:[HttpClient]
   
 })
 export class AppComponent implements OnInit {
@@ -15,8 +18,9 @@ export class AppComponent implements OnInit {
 
   // Declare empty list of people
   people: any[] = [];
+  constructor(private http: HttpClient) {
 
-  constructor( private http: HttpClient) {}
+  }
 
   // Angular 2 Life Cycle event when component has been initialized
   ngOnInit() {
