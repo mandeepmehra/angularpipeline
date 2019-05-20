@@ -9,12 +9,11 @@ exports.config = {
     './src/**/*.e2e-spec.ts'
   ],
   capabilities: {
-    'browserName': 'chrome',
     chromeOptions: {
-    binary: process.env.CHROME_BIN,
-    args: ['--headless', '--no-sandbox']
-    }
- },
+      args: [ "--headless" ]
+    },
+    'browserName': 'chrome'
+  },
   directConnect: true,
   baseUrl: 'http://localhost:4200/',
   framework: 'jasmine',
