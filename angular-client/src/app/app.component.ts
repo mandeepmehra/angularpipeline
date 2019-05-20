@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
 
   // Declare empty list of people
   people: any[] = [];
-  constructor(private http: HttpClient) {
+  constructor(  private http: HttpClient) {
 
   }
 

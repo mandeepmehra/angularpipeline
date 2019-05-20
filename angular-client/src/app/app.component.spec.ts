@@ -1,4 +1,6 @@
-import { TestBed, async } from '@angular/core/testing';
+import { TestBed, async, inject } from '@angular/core/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
@@ -6,6 +8,9 @@ describe('AppComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         AppComponent
+      ],
+      imports: [
+        HttpClientTestingModule,
       ],
     }).compileComponents();
   }));
@@ -22,10 +27,5 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('angular-client');
   });
 
-  it('should render title in a h1 tag', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to angular-client!');
-  });
+  
 });

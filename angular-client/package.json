@@ -5,9 +5,10 @@
     "ng": "ng",
     "start": "ng serve --host 127.0.0.1",
     "build": "ng build",
-    "test": "ng test",
+    "test-with-chrome": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e --capabilities.chromeOptions.args=--headless",
+    "test": "ng test --watch=false --browsers=ChromeHeadless"
   },
   "private": true,
   "dependencies": {
