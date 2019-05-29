@@ -14,7 +14,9 @@ export class AppComponent implements OnInit {
   title = "angular-client";
 
   // Link to our api, pointing to localhost
-  API = 'http://localhost:3000/api';
+  API_SERVICE_NAME='localhost';
+  API_SERVICE_PORT='3000'
+  API = 'http://' + this.API_SERVICE_NAME+':' + this.API_SERVICE_PORT + '/api';
 
   // Declare empty list of people
   people: any[] = [];
@@ -38,9 +40,14 @@ export class AppComponent implements OnInit {
   // Get all users from the API
   getAllPeople() {
     this.http.get(`${this.API}/users`)
-      .subscribe((people: any) => {
-        console.log(people)
-        this.people = people
-      })
+    .subscribe(
+        (people:any) => {
+          // Handle result
+          console.log('successfully got people')
+          console.log(people)
+          this.people = people
+        },
+        (error:any) => {console.log(error)}
+      )
   }
 }

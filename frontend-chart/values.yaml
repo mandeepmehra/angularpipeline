@@ -1,0 +1,13 @@
+# Default values for mean-k8s.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+replicaCount: 1
+image:
+  repository: konarpriyanku/frontend-angular
+  tag: 0.1.2
+  pullPolicy: Always
+service:
+  name: mean-frontend
+  type: NodePort
+  externalPort: 4200
+  internalPort: 4200
