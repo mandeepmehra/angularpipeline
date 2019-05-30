@@ -6,7 +6,7 @@ services:
     build: angular-client # specify the directory of the Dockerfile
     image: konarpriyanku/xebia_fe
     ports:
-      - "4200:4200" # specify port forewarding
+      - "4200:80" # specify port forewarding
 networks: 
   default:
     external:
