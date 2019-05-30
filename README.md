@@ -19,4 +19,5 @@
 ## Once clusrter is set up 
 - install the helm charts
 - cd into dir xebia-microservice-mean-frontend
-- helm install --name fe ./frontend-chart
+
+- helm install --name fe  -f ./frontend-chart/custom_values.yaml   ./frontend-chart
