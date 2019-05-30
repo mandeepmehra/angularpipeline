@@ -32,7 +32,7 @@ RUN rm -rf /usr/share/nginx/html/*
 
 ## From ‘builder’ stage copy over the artifacts in dist folder to default nginx public folder
 COPY --from=builder /app/dist /usr/share/nginx/html
-EXPOSE 4200
+EXPOSE 8080
 RUN chown -R nginx:nginx /usr/share/nginx/html/angular-client
 
 CMD ["nginx", "-g", "daemon off;"]
