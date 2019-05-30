@@ -16,7 +16,8 @@ export class AppComponent implements OnInit {
 
   // Link to our api, pointing to localhost
 
-  API = environment.API_ENDPOINT
+  API = environment.API_ENDPOINT 
+  //API = 'http://kworker1:31199/api/users';
 
   // Declare empty list of people
   people: any[] = [];
