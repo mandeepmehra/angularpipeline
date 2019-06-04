@@ -1,8 +1,0 @@
-image:
-  tag: latest
-
-service:
-  type: NodePort
-  nodePort: 30200
-
-
