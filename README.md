@@ -19,5 +19,10 @@
 ## Once clusrter is set up 
 - install the helm charts
 - cd into dir xebia-microservice-mean-frontend
-
 - helm install --name fe  -f ./frontend-chart/custom_values.yaml   ./frontend-chart
+
+# to push 
+
+curl -X POST -H "Content-Type: application/json" \
+ -d '{"name":"priyanku","age":"33"}' \
+http://kworker1:30100/api/users
