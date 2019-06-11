@@ -7,7 +7,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve  --host 0.0.0.0 --disable-host-check",
-    "build": "ng build --configuration=production",
+    "build": "ng build --configuration=$npm_package_config_configuration",
     "test-with-chrome": "ng test",
     "lint": "ng lint",
     "protractortest": "protractor ./e2e/protractor.conf.$npm_package_config_configuration.js",
