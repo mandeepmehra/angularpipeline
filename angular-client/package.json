@@ -1,13 +1,18 @@
 {
   "name": "angular-client",
   "version": "0.0.0",
+  "config": {
+    "configuration": "production"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve  --host 0.0.0.0 --disable-host-check",
     "build": "ng build --configuration=production",
     "test-with-chrome": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
+    "protractortest": "protractor ./e2e/protractor.conf.$npm_package_config_configuration.js",
+    "e2e": " npm-run-all  webdriver-update protractortest ",
+    "webdriver-update": "webdriver-manager update",
     "test": "ng test --watch=false  --code-coverage --browsers=ChromeHeadless"
   },
   "private": true,
@@ -23,7 +28,9 @@
     "core-js": "^2.5.4",
     "rxjs": "~6.3.3",
     "tslib": "^1.9.0",
-    "zone.js": "~0.8.26"
+    "zone.js": "~0.8.26",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^2.6.3"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.13.0",

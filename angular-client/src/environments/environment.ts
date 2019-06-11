@@ -1,5 +1,5 @@
-const API_HOST='localhost';
-const API_PORT='3000';
+const API_HOST = 'localhost';
+const API_PORT = '3000';
 export const environment = {
   production: false,
   staging: true,

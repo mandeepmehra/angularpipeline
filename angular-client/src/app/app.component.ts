@@ -1,23 +1,20 @@
 import { Component, OnInit, Optional, Inject } from '@angular/core';
-import  { HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { environment } from '../environments/environment';
-
-
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  providers:[HttpClient]
-  
+  providers: [HttpClient]  
 })
 export class AppComponent implements OnInit {
-  title = "angular-client";
+  title = 'angular-client';
 
   // Link to our api, pointing to localhost
 
-  API = environment.API_ENDPOINT 
-  //API = 'http://kworker1:31199/api/users';
+  API = environment.API_ENDPOINT ;
+  // API = 'http://kworker1:31199/api/users';
 
   // Declare empty list of people
   people: any[] = [];
