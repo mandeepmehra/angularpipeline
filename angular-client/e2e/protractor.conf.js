@@ -18,7 +18,7 @@ exports.config = {
           '--no-sandbox'
        ]
     },
-    browserName:"ChromeHeadless"
+    browserName:"chrome"
   },
   directConnect: true,
   baseUrl: 'http://localhost:4200/',
