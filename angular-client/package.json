@@ -13,7 +13,7 @@
     "protractortest": "protractor ./e2e/protractor.conf.$npm_package_config_configuration.js",
     "e2e": " npm-run-all  webdriver-update protractortest ",
     "webdriver-update": "webdriver-manager update",
-    "test": "ng test --watch=false  --code-coverage --browsers=ChromeHeadless --no-sandbox"
+    "test": "ng test --watch=false  --code-coverage "
   },
   "private": true,
   "dependencies": {
