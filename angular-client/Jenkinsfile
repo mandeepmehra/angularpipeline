@@ -126,12 +126,6 @@ pipeline{
           }
         }
 
-	      stage ('Cleanup Image'){
-           steps {
-             sh "docker rmi $IMAGE_TAG"
-	        }
-        }
-
         stage ('Deploy to QA'){
             steps{
                  sh 'helm repo update'
