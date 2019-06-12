@@ -24,6 +24,6 @@ describe('AppComponent', () => {
   it(`should have as title 'angular-client'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('angular-client');
+    expect(app.title).toEqual('angular-client version 1.0.0');
   });  
 });
