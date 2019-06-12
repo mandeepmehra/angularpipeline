@@ -164,7 +164,7 @@ pipeline{
             steps{
                 dir("${SRC_DIR}"){
                     script {
-                    DOCKER_IMAGE = docker.build("${IMAGE_TAG}-prod", "--build-arg configuration=production .")
+                    DOCKER_IMAGE = docker.build("${IMAGE_TAG}-prod", " --no-cache --build-arg configuration=production .")
                     }
                 }
             }
