@@ -9,7 +9,8 @@ import { environment } from '../environments/environment';
   providers: [HttpClient]  
 })
 export class AppComponent implements OnInit {
-  title = 'angular-client version 1.0.0';
+  title = 'angular-client';
+  appversion= 'version 1.0.0'
 
   // Link to our api, pointing to localhost
 
