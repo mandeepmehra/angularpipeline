@@ -1,6 +1,9 @@
 # Create image based on the official Node 10 image from dockerhub
 FROM node:10 as builder
 
+ARG configuration=production
+
+
 # Create a directory where our app will be placed
 RUN mkdir -p /app
 
@@ -10,6 +13,8 @@ WORKDIR /app
 # Copy dependency definitions
 COPY package*.json /app/
 
+ENV NODE_ENV=$configuration,
+ENV npm_package_config_configuration=$configuration
 # Install dependecies
 RUN npm install
 
