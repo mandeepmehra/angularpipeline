@@ -1,4 +1,4 @@
-const API_HOST = 'kworker1'; // use the kubernetes node name 
+const API_HOST = 'demoapp'; // use the kubernetes node name 
 const API_PORT = '30101'; // use the kubernetes nodeport on which api service  is running 
 export const environment = {
   production: true,
