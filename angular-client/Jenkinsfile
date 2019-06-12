@@ -6,6 +6,7 @@ pipeline{
          buildDiscarder(logRotator(numToKeepStr: '10'))
     }
     environment {
+        SCAN_IMAGE = 'false'
         QA_PORT = '30201'
         PROD_PORT = '30200'
         APP_NAME='xebia-fe'
@@ -90,6 +91,11 @@ pipeline{
         }
 
         stage ('Scan Image'){
+            when {
+                expression {
+                    return SCAN_IMAGE == 'true';
+                }
+            }
            steps{
             sh "docker run --rm -p9279:9279 -v /var/run/docker.sock:/var/run/docker.sock cplee/clair-scanner clair-scanner --ip ${SCANNER_CLIENT_IP}  -c http://${SCANNER_HOST}:${SCANNER_PORT} ${IMAGE_TAG}"
            }
