@@ -59,7 +59,7 @@ pipeline{
             stage ('Static Code Analysis'){
               steps{
                 dir("${SRC_DIR}"){
-                  script {
+                  withSonarQubeEnv('localsonar') {
                     sh "sonar-scanner -Dsonar.host.url=http://sonarqube:9000"
                   }
                 }
