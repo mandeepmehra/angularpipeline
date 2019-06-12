@@ -8,11 +8,17 @@ exports.config = {
   specs: [
     './src/**/*.e2e-spec.ts'
   ],
-  capabilities: {
-    chromeOptions: {
-      args: [ "--headless" ]
+  capabilities:{
+    chromeOptions:{
+       args:[
+          '--headless',
+          '--disable-gpu',
+          '--window-size=800x600',
+          '--disable-dev-shm-usage',
+          '--no-sandbox'
+       ]
     },
-    'browserName': 'chrome'
+    browserName:"ChromeHeadless"
   },
   directConnect: true,
   baseUrl: 'http://kworker1:30200/',
