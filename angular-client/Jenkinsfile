@@ -75,7 +75,7 @@ pipeline{
               steps{
 		            dir("${SRC_DIR}"){
     		          script {
-		                DOCKER_IMAGE = docker.build(IMAGE_TAG, "--build-arg configuration=qa .")
+		                DOCKER_IMAGE = docker.build("${IMAGE_TAG}-qa", "--build-arg configuration=qa .")
 		              }
                 }
              }
@@ -135,30 +135,73 @@ pipeline{
         stage ('Deploy to QA'){
             steps{
                  sh 'helm repo update'
-                 sh "helm upgrade --install ${APP_NAME}-qa  --set buildNumber=$BUILD_NUMBER,image.tag=$BUILD_NUMBER,image.repository=${DTR_URL}/${IMAGE_NAME},service.nodePort=$QA_PORT --namespace qa helm/${APP_NAME} --version ${HELM_CHART_VER}"
+                 sh "helm upgrade --install ${APP_NAME}-qa  --set buildNumber=$BUILD_NUMBER,image.tag=$BUILD_NUMBER-qa,image.repository=${DTR_URL}/${IMAGE_NAME},service.nodePort=$QA_PORT --namespace qa helm/${APP_NAME} --version ${HELM_CHART_VER}"
             }
         }
 
-        stage ('Run Integration Tests'){
-          when {
-            expression {
-                return SKIP_INTEGRATION_TEST == 'false';
+        stage ('Run QA Integration Tests'){
+            when {
+                expression {
+                    return SKIP_INTEGRATION_TEST == 'false';
+                }
             }
-          }
+
             steps{
-                sh 'echo TBD'
+                dir("${SRC_DIR}/e2e"){
+                    sh "protractor protractor.conf.js --baseUrl=http://${KUBE_HOST}:${QA_PORT}"
+                }
+                
             }
         }
 
+        stage ('Build Prod Image'){
+            when{
+                environment name: 'GIT_BRANCH', value: 'origin/master'
+            }
+            steps{
+                dir("${SRC_DIR}"){
+                    script {
+                    DOCKER_IMAGE = docker.build("${IMAGE_TAG}-prod", "--build-arg configuration=production .")
+                    }
+                }
+            }
+        }
+        stage ('Publish Image'){
+            when{
+                environment name: 'GIT_BRANCH', value: 'origin/master'
+            }            
+            steps{
+                script {
+                    docker.withRegistry( '', DTR_CREDS ) {
+                    DOCKER_IMAGE.push()
+                    }
+                }
+            }
+        }
         stage ('Deploy to Production'){
           when{
             environment name: 'GIT_BRANCH', value: 'origin/master'
           }
           steps{
                 sh 'helm repo update'
-                sh "helm upgrade --install ${APP_NAME}-prod  --set buildNumber=$BUILD_NUMBER,image.tag=$BUILD_NUMBER,image.repository=${DTR_URL}/${IMAGE_NAME},service.nodePort=$PROD_PORT --namespace prod helm/${APP_NAME} --version ${HELM_CHART_VER}"
+                sh "helm upgrade --install ${APP_NAME}-prod  --set buildNumber=$BUILD_NUMBER,image.tag=$BUILD_NUMBER-prod,image.repository=${DTR_URL}/${IMAGE_NAME},service.nodePort=$PROD_PORT --namespace prod helm/${APP_NAME} --version ${HELM_CHART_VER}"
           }
         }
+
+        stage ('Run Prod Integration Tests'){
+            when {
+                expression {
+                    return SKIP_INTEGRATION_TEST == 'false';
+                }
+            }
+
+            steps{
+                dir("${SRC_DIR}/e2e"){
+                    sh "protractor protractor.conf.js --baseUrl=http://${KUBE_HOST}:${PROD_PORT}"
+                }
+                
+            }
+        }        
 
         stage ('Business Validation'){
           when{
