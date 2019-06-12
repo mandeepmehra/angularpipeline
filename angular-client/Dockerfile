@@ -1,7 +1,7 @@
 # Create image based on the official Node 10 image from dockerhub
-FROM node:10 as builder
+FROM mandeepmehra/angular-cli:2.0 as builder
 
-ARG configuration=production
+ARG configuration
 
 
 # Create a directory where our app will be placed
@@ -22,7 +22,7 @@ RUN npm install
 COPY . /app/
 
 ## Build the angular app in production mode and store the artifacts in dist folder
-RUN npm run build
+RUN ng build --configuration=$configuration
 
 
 ### STAGE 2: Setup ###
