@@ -132,6 +132,15 @@ pipeline{
                  sh "helm upgrade --install ${APP_NAME}-qa  --set buildNumber=$BUILD_NUMBER,image.tag=$BUILD_NUMBER-qa,image.repository=${DTR_URL}/${IMAGE_NAME},service.nodePort=$QA_PORT --namespace qa helm/${APP_NAME} --version ${HELM_CHART_VER}"
             }
         }
+        stage ('Deployment Verification'){
+            input {
+                message 'Deployment Success'
+                ok 'Yes'
+            }    
+            steps{
+                echo "TBD"
+            }    
+        }
 
         stage ('Run QA Integration Tests'){
             when {
@@ -181,6 +190,15 @@ pipeline{
                 sh "helm upgrade --install ${APP_NAME}-prod  --set buildNumber=$BUILD_NUMBER,image.tag=$BUILD_NUMBER-prod,image.repository=${DTR_URL}/${IMAGE_NAME},service.nodePort=$PROD_PORT --namespace prod helm/${APP_NAME} --version ${HELM_CHART_VER}"
           }
         }
+        stage ('Deployment Verification'){
+            input {
+                message 'Deployment Success'
+                ok 'Yes'
+            }    
+            steps{
+                echo "TBD"
+            }    
+        }        
 
         stage ('Run Prod Integration Tests'){
             when {
