@@ -62,10 +62,11 @@ pipeline{
                   withSonarQubeEnv('localsonar') {
                     sh "sonar-scanner -Dsonar.host.url=http://sonarqube:9000"
                   }
-
-                  def qualitygate = waitForQualityGate()
-                  if (qualitygate.status != "OK") {
-                    error "Pipeline aborted due to quality gate coverage failure: ${qualitygate.status}"
+                  script {
+                    def qualitygate = waitForQualityGate()
+                    if (qualitygate.status != "OK") {
+                      error "Pipeline aborted due to quality gate coverage failure: ${qualitygate.status}"
+                    }
                   }
                 }
               }
