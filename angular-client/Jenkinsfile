@@ -62,12 +62,18 @@ pipeline{
                   withSonarQubeEnv('localsonar') {
                     sh "sonar-scanner -Dsonar.host.url=http://sonarqube:9000"
                   }
+
+                  def qualitygate = waitForQualityGate()
+                  if (qualitygate.status != "OK") {
+                    error "Pipeline aborted due to quality gate coverage failure: ${qualitygate.status}"
+                  }
                 }
               }
             }
         
           }
         }
+
 
         stage ('Build Docker Image and Package chart'){
           parallel {
